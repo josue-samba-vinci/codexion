@@ -1,3 +1,11 @@
+#ifndef CODEXION_H
+# define CODEXION_H
+
+# include <stdlib.h>
+# include <limits.h>
+# include <stddef.h>
+# include <stdio.h>
+
 typedef struct s_config
 {
     int     nb_coders;
@@ -9,3 +17,8 @@ typedef struct s_config
     long    dongle_cooldown;
     int     scheduler;
 }   t_config;
+
+int	ft_atoi(const char *str);
+int	ft_strcmp(const char *s1, const char *s2);
+
+#endif
