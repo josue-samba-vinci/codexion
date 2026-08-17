@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ""
+//#include "codexion.h"
+#include "stddef.h"
+#include "limits.h"
 
 int	ft_atoi(const char *str)
 {
@@ -19,23 +21,32 @@ int	ft_atoi(const char *str)
 
 	i = 0;
 	nb = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if (nb > (nb * 10) + (str[i] - '0') && sign == 1)
-			return ((int)LONG_MAX);
-		if (nb > (nb * 10) + (str[i] - '0') && sign == -1)
-			return ((int)LONG_MIN);
-		nb = (nb * 10) + (str[i] - '0');
-		i++;
-	}
-	return ((int)(nb * sign));
+	while (str[i])
+		if (str[i] >= '0' && str[i] <= '9')	
+		{
+			if (nb == INT_MAX)
+				return (INT_MAX);
+			nb = (nb * 10) + (str[i] - '0');
+			i++;
+		}
+		else 
+		return (-1);
+	if (nb > INT_MAX)
+		return (-1);
+	else
+		return ((int)(nb));
 }
+
+/*#include <stdio.h>
+int main()
+{
+    char *str1 = "12";
+    char *str2 = "1234567890";
+    char *str3 = "123maman";
+	char *str4 = "2147483647";
+
+    printf("%d\n", ft_atoi(str1));
+    printf("%d\n", ft_atoi(str2));
+    printf("%d\n", ft_atoi(str3));
+    printf("%d", ft_atoi(str4));
+}*/
