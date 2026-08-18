@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "codexion.h"
-#include "stddef.h"
-#include "limits.h"
+#include "codexion.h"
 
 int	ft_atoi(const char *str)
 {
 	size_t	i;
 	long	nb;
 
+	if (str[0] == '\0')
+		return (-1);
 	i = 0;
 	nb = 0;
 	while (str[i])
@@ -30,7 +30,7 @@ int	ft_atoi(const char *str)
 			i++;
 		}
 		else 
-		return (-1);
+			return (-1);
 	if (nb > INT_MAX)
 		return (-1);
 	else
