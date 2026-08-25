@@ -22,19 +22,18 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nb = 0;
 	while (str[i])
+	{
 		if (str[i] >= '0' && str[i] <= '9')	
 		{
-			if (nb == INT_MAX)
-				return (INT_MAX);
 			nb = (nb * 10) + (str[i] - '0');
+			if (nb > INT_MAX)
+				return (-1);
 			i++;
 		}
 		else 
 			return (-1);
-	if (nb > INT_MAX)
-		return (-1);
-	else
-		return ((int)(nb));
+	}
+	return ((int)(nb));
 }
 
 /*#include <stdio.h>
