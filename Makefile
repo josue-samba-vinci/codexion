@@ -11,7 +11,8 @@ SRCS		= main.c \
 			  init.c \
 			  utils/ft_atoi.c \
 			  utils/ft_strcmp.c \
-			  utils/parser_utils.c
+			  utils/parser_utils.c \
+			  utils/time.c
 
 OBJS		= $(SRCS:.c=.o)
 

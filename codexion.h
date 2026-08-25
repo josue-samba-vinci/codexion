@@ -78,5 +78,8 @@ int	init_dongles(t_config *config);
 void	assign_dongle(t_coder *coder, t_dongle *dongles, int coder_pos, int nb_coders);
 int	init_coders(t_config *config);
 int init_config(t_config *config);
+int only_numbers(char **argv);
+int number_of_coder(char **argv);
+long get_time_ms(void);
 
 #endif
