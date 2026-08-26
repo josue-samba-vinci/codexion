@@ -13,7 +13,8 @@ SRCS		= main.c \
 			  utils/ft_strcmp.c \
 			  utils/parser_utils.c \
 			  utils/time.c \
-			  utils/log.c
+			  utils/log.c \
+			  simulation.c
 
 OBJS		= $(SRCS:.c=.o)
 
