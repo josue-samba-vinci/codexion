@@ -23,14 +23,14 @@ int	ft_atoi(const char *str)
 	nb = 0;
 	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')	
+		if (str[i] >= '0' && str[i] <= '9')
 		{
 			nb = (nb * 10) + (str[i] - '0');
 			if (nb > INT_MAX)
 				return (-1);
 			i++;
 		}
-		else 
+		else
 			return (-1);
 	}
 	return ((int)(nb));
