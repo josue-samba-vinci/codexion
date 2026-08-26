@@ -18,3 +18,15 @@ int sim_is_over(t_config *config)
     return (actual_end);
 }
 
+void    precise_sleep(long duration_ms, t_config *config)
+{
+    long    start;
+
+    start = get_time_ms();
+    while (get_time_ms() - start < duration_ms)
+    {
+        if (sim_is_over(config))
+            return;
+        usleep(100);   
+    }
+}
