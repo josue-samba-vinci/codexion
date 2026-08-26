@@ -1,6 +1,6 @@
 #include "codexion.h"
 
-int validate_data(char **argv)
+int	validate_data(char **argv)
 {
 	int	i;
 
@@ -16,7 +16,7 @@ int validate_data(char **argv)
 	return (0);
 }
 
-void input_data(char **argv, t_config *config)
+void	input_data(char **argv, t_config *config)
 {
 	config->nb_coders = ft_atoi(argv[1]);
 	config->time_to_burnout = ft_atoi(argv[2]);
@@ -25,7 +25,7 @@ void input_data(char **argv, t_config *config)
 	config->time_to_refactor = ft_atoi(argv[5]);
 	config->nb_compiles_required = ft_atoi(argv[6]);
 	config->dongle_cooldown = ft_atoi(argv[7]);
-	if (ft_strcmp(argv[8],"fifo") == 0)
+	if (ft_strcmp(argv[8], "fifo") == 0)
 		config->scheduler = 0;
 	else
 		config->scheduler = 1;
@@ -33,7 +33,7 @@ void input_data(char **argv, t_config *config)
 	return ;
 }
 
-int validator(int argc, char **argv)
+int	validator(int argc, char **argv)
 {
 	if (argc != 9)
 		return (0);
@@ -54,7 +54,9 @@ int	parser(int argc, char **argv, t_config *config)
 		return (1);
 	}
 	printf("%s\n", "Please put only numbers except for the last argument");
-	printf("%s", "./codexion <number1_greater_than_0> <positive_number2> <positive_number3> <positive_number4> ");
-	printf("%s", "<positive_number5> <positive_number6> <positive_number7> <fifo/edf>");
+	printf("%s", "./codexion <number1_greater_than_0> <positive_number2>");
+	printf("%s", "<positive_number3> <positive_number4> ");
+	printf("%s", "<positive_number5> <positive_number6>");
+	printf("%s", "<positive_number7> <fifo/edf>");
 	return (0);
 }
