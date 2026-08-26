@@ -81,5 +81,6 @@ int init_config(t_config *config);
 int only_numbers(char **argv);
 int number_of_coder(char **argv);
 long get_time_ms(void);
+int sim_is_over(t_config *config);
 
 #endif
