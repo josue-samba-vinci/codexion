@@ -96,5 +96,11 @@ long	get_time_ms(void);
 int		sim_is_over(t_config *config);
 void	log_action(t_coder *coder, char *msg);
 void	precise_sleep(long duration_ms, t_config *config);
+void	take_dongles(t_coder *coder);
+void	release_dongles(t_coder *coder);
+int		start_simulation(t_config *config);
+void	handle_one_coder(t_coder *coder);
+void	*coder_routine(void *arg);
+void	update_compile(t_coder *coder);
 
 #endif
