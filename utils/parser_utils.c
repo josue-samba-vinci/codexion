@@ -1,17 +1,17 @@
 #include "codexion.h"
 
-int number_of_coder(char **argv)
+int	number_of_coder(char **argv)
 {
 	if (ft_atoi(argv[1]) == 0)
 		return (0);
 	return (1);
 }
 
-int only_numbers(char **argv)
+int	only_numbers(char **argv)
 {
 	int	i;
-	int j;
-	
+	int	j;
+
 	i = 1;
 	while (i <= 7)
 	{
