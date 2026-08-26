@@ -12,18 +12,51 @@
 
 #include "codexion.h"
 
+void	update_compile(t_coder *coder)
+{
+	pthread_mutex_lock(&coder->mutex);
+	coder->last_compile = get_time_ms();
+	coder->compile_count++;
+	pthread_mutex_unlock(&coder->mutex);
+}
+
+void	handle_one_coder(t_coder *coder)
+{
+	pthread_mutex_lock(&coder->first_dongle->mutex);
+	log_action(coder, "has taken a dongle");
+	precise_sleep(coder->config->time_to_burnout, coder->config);
+	pthread_mutex_unlock(&coder->first_dongle->mutex);
+}
+
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
 
 	coder = (t_coder *)arg;
+	if (coder->config->nb_coders == 1)
+	{
+		handle_one_coder(coder);
+		return (NULL);
+	}
+	while (!sim_is_over(coder->config))
+	{
+		take_dongles(coder);
+		update_compile(coder);
+		log_action(coder, "is compiling");
+		precise_sleep(coder->config->time_to_compile, coder->config);
+		release_dongles(coder);
+		log_action(coder, "is debugging");
+		precise_sleep(coder->config->time_to_debug, coder->config);
+		log_action(coder, "is refactoring");
+		precise_sleep(coder->config->time_to_refactor, coder->config);
+	}
 	return (NULL);
 }
 
-int start_simulation(t_config *config)
+int	start_simulation(t_config *config)
 {
-	int	i;
-	t_coder *coder;
+	int		i;
+	t_coder	*coder;
 
 	i = 0;
 	config->start = get_time_ms();
