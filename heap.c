@@ -19,17 +19,21 @@ t_request   *heap_top(t_heap *heap)
     return &heap->data[0];
 }
 
+void    shift_down(t_heap *heap, int index)
+{
+    int min;
+
+    min = smallest_child(heap, index);
+    if (min = index)
+        return ;
+    swap_request(&heap->data[index], &heap->data[min]);
+    shift_down(heap, min);
+}
+
 void    heap_pop(t_heap *heap)
 {
     heap->data[0] = heap->data[-1];
     size--;
     shift_down(heap, 0);
 }
-
-//void    shift_down(t_heap *heap, int index)
-//{
-//    int smallest;
-//
-//    smallest = 
-//}
     
