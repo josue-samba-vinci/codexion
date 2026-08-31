@@ -15,7 +15,8 @@ SRCS		= main.c \
 			  utils/time.c \
 			  utils/log.c \
 			  simulation.c \
-			  dongle.c
+			  dongle.c \
+			  scheduler.c
 
 OBJS		= $(SRCS:.c=.o)
 

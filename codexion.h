@@ -102,5 +102,8 @@ int		start_simulation(t_config *config);
 void	handle_one_coder(t_coder *coder);
 void	*coder_routine(void *arg);
 void	update_compile(t_coder *coder);
+long	choose_type_ticket(t_coder *coder, t_dongle *dongle)
+long	edf_key(t_coder *coder)
+long	fifo_key(t_dongle *dongle)
 
 #endif
