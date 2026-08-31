@@ -91,3 +91,13 @@ int	init_config(t_config *config)
 		return (0);
 	return (1);
 }
+
+int init_heap(t_heap *heap, int capacity)
+{
+	heap = malloc(sizeof(t_request)*capacity)
+	if (!heap)
+		return 0;
+	heap->size = 0;
+	heap->capacity = 0;
+	return 1;
+}
