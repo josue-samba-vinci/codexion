@@ -82,28 +82,34 @@ typedef struct s_config
 
 }	t_config;
 
-int		ft_atoi(const char *str);
-int		ft_strcmp(const char *s1, const char *s2);
-int		parser(int argc, char **argv, t_config *config);
-int		init_dongles(t_config *config);
-void	assign_dongle(t_coder *coder,
-			t_dongle *dongles, int coder_pos, int nb_coders);
-int		init_coders(t_config *config);
-int		init_config(t_config *config);
-int		only_numbers(char **argv);
-int		number_of_coder(char **argv);
-long	get_time_ms(void);
-int		sim_is_over(t_config *config);
-void	log_action(t_coder *coder, char *msg);
-void	precise_sleep(long duration_ms, t_config *config);
-void	take_dongles(t_coder *coder);
-void	release_dongles(t_coder *coder);
-int		start_simulation(t_config *config);
-void	handle_one_coder(t_coder *coder);
-void	*coder_routine(void *arg);
-void	update_compile(t_coder *coder);
-long	choose_type_ticket(t_coder *coder, t_dongle *dongle)
-long	edf_key(t_coder *coder)
-long	fifo_key(t_dongle *dongle)
+int			ft_atoi(const char *str);
+int			ft_strcmp(const char *s1, const char *s2);
+int			parser(int argc, char **argv, t_config *config);
+int			init_dongles(t_config *config);
+void		assign_dongle(t_coder *coder,
+				t_dongle *dongles, int coder_pos, int nb_coders);
+int			init_coders(t_config *config);
+int			init_config(t_config *config);
+int			only_numbers(char **argv);
+int			number_of_coder(char **argv);
+long		get_time_ms(void);
+int			sim_is_over(t_config *config);
+void		log_action(t_coder *coder, char *msg);
+void		precise_sleep(long duration_ms, t_config *config);
+void		take_dongles(t_coder *coder);
+void		release_dongles(t_coder *coder);
+int			start_simulation(t_config *config);
+void		handle_one_coder(t_coder *coder);
+void		*coder_routine(void *arg);
+void		update_compile(t_coder *coder);
+long		choose_type_ticket(t_coder *coder, t_dongle *dongle);
+long		edf_key(t_coder *coder);
+long		fifo_key(t_dongle *dongle);
+int			init_heap(t_heap *heap, int capacity);
+int			heap_push(t_heap *heap, t_request request);
+void		shift_up(t_heap *heap, int index);
+void		heap_pop(t_heap *heap);
+void		shift_down(t_heap *heap, int index);
+t_request	*heap_top(t_heap *heap);
 
 #endif

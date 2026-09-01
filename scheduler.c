@@ -27,6 +27,11 @@ long	fifo_key(t_dongle *dongle)
 
 long	edf_key(t_coder *coder)
 {
-	return (coder->mutex->last_compile
-		+ coder->config->time_to_burnout);
+	long	nearest_burnout;
+
+	pthread_mutex_lock(&coder->mutex);
+	nearest_burnout = (coder->last_compile
+			+ coder->config->time_to_burnout);
+	pthread_mutex_unlock(&coder->mutex);
+	return (nearest_burnout);
 }

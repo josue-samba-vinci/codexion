@@ -29,9 +29,8 @@ int	init_dongles(t_config *config)
 		dongle->id = i;
 		dongle->available = 1;
 		dongle->free_at = 0;
-		dongle->waiters.capacity = 0;
-		dongle->waiters.size = 0;
-		dongle->waiters.data = NULL;
+		if (!init_heap(&dongle->waiters, config->nb_coders))
+			return (0);
 		dongle->ticket = 0;
 		i++;
 	}
@@ -92,12 +91,12 @@ int	init_config(t_config *config)
 	return (1);
 }
 
-int init_heap(t_heap *heap, int capacity)
+int	init_heap(t_heap *heap, int capacity)
 {
-	heap = malloc(sizeof(t_request)*capacity)
-	if (!heap)
-		return 0;
+	heap->data = malloc(sizeof(t_request) * capacity);
+	if (!heap->data)
+		return (0);
 	heap->size = 0;
-	heap->capacity = 0;
-	return 1;
+	heap->capacity = capacity;
+	return (1);
 }
