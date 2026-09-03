@@ -32,8 +32,10 @@ void	shift_down(t_heap *heap, int index)
 
 void	heap_pop(t_heap *heap)
 {
-	heap->data[0] = heap->data[-1];
-	size--;
+	if (heap->size == 0)
+		return ;
+	heap->data[0] = heap->data[heap->size - 1];
+	heap->size--;
 	shift_down(heap, 0);
 }
 
@@ -43,10 +45,10 @@ void	shift_up(t_heap *heap, int index)
 
 	if (index == 0)
 		return ;
-	parent = (i - 1) / 2;
-	if (!higher_priority(heap->data[i], heap->data[parent]))
+	parent = (index - 1) / 2;
+	if (!higher_priority(&heap->data[index], &heap->data[parent]))
 		return ;
-	swap_request(&heap->data[i], &heap->data[parent]);
+	swap_request(&heap->data[index], &heap->data[parent]);
 	shift_up(heap, parent);
 }
 
@@ -56,6 +58,6 @@ int	heap_push(t_heap *heap, t_request request)
 		return (0);
 	heap->data[heap->size] = request;
 	heap->size++;
-	shift_up(heap, heap->size - 1)
+	shift_up(heap, heap->size - 1);
 	return (1);
 }

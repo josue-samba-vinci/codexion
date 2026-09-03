@@ -16,7 +16,7 @@ int	higher_priority(t_request *a, t_request *b)
 {
 	if (a->key != b->key)
 		return (a->key < b->key);
-	return (a.coder_id < b.coder_id);
+	return (a->coder_id < b->coder_id);
 }
 
 void	swap_request(t_request *a, t_request *b)
@@ -35,13 +35,13 @@ int	smallest_child(t_heap *heap, int index)
 	int	right;
 
 	min = index;
-	left = 2 * i + 1;
-	right = 2 * i + 2;
+	left = 2 * index + 1;
+	right = 2 * index + 2;
 	if (left < heap->size
-		&& has_priority(heap->data[left], heap->data[min]))
+		&& higher_priority(&heap->data[left], &heap->data[min]))
 		min = left;
-	if (left < heap->size
-		&& has_priority(heap->data[right], heap->data[min]))
+	if (right < heap->size
+		&& higher_priority(&heap->data[right], &heap->data[min]))
 		min = right;
 	return (min);
 }

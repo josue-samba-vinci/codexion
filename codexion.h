@@ -111,5 +111,8 @@ void		shift_up(t_heap *heap, int index);
 void		heap_pop(t_heap *heap);
 void		shift_down(t_heap *heap, int index);
 t_request	*heap_top(t_heap *heap);
+void		swap_request(t_request *a, t_request *b);
+int			smallest_child(t_heap *heap, int index);
+int			higher_priority(t_request *a, t_request *b);
 
 #endif
