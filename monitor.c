@@ -53,3 +53,38 @@ int	finished(t_config *config)
 	}
 	return (1);
 }
+
+void	stop_simulation(t_config *config, int coder_id)
+{
+	pthread_mutex_lock(&config->state_lock);
+	config->end = 1;
+	pthread_mutex_unlock(&config->state_lock);
+	if (coder_id >= 0)
+	{
+		pthread_mutex_lock(&config->print_lock);
+		printf("%ld %d burned out\n", get_time_ms() - config->start, coder_id);
+		pthread_mutex_unlock(&config->print_lock);
+	}
+}
+
+void	*monitor_routine(void *arg)
+{
+	t_config	*config;
+	int			burned_out;
+
+	config = (t_config *)arg;
+	while (1)
+	{
+		burned_out = check_burnout(config);
+		if (burned_out >= 0)
+		{
+			stop_simulation(config, burned_out);
+			return ;
+		}
+		if (finished(config))
+		{
+			stop_simulation(config, -1);
+			return ;
+		}
+		usleep(1000);
+	}
