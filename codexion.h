@@ -114,5 +114,9 @@ t_request	*heap_top(t_heap *heap);
 void		swap_request(t_request *a, t_request *b);
 int			smallest_child(t_heap *heap, int index);
 int			higher_priority(t_request *a, t_request *b);
+int			check_burnout(t_config *config);
+int			finished(t_config *config);
+void		stop_simulation(t_config *config, int coder_id);
+void		*monitor_routine(void *arg);
 
 #endif
