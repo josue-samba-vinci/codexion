@@ -67,6 +67,8 @@ int	start_simulation(t_config *config)
 		pthread_create(&coder->thread_id, NULL, coder_routine, coder);
 		i++;
 	}
+	pthread_create(&config->monitor, NULL, monitor_routine, config);
+	pthread_join(config->monitor, NULL);
 	i = 0;
 	while (i < config->nb_coders)
 	{

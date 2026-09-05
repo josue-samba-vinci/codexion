@@ -79,12 +79,13 @@ void	*monitor_routine(void *arg)
 		if (burned_out >= 0)
 		{
 			stop_simulation(config, burned_out);
-			return ;
+			return (NULL);
 		}
 		if (finished(config))
 		{
 			stop_simulation(config, -1);
-			return ;
+			return (NULL);
 		}
 		usleep(1000);
 	}
+}
