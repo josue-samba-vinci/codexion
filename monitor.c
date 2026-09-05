@@ -31,3 +31,17 @@ int	check_burnout(t_config *config)
 	}
 	return (-1);
 }
+
+int	finished(t_config *config)
+{
+	int	i;
+
+	i = 0;
+	while (i < config->nb_coders)
+	{
+		if (config->coders[i].compile_count != config->nb_compiles_required)
+			return (0);
+		i++;
+	}
+	return (1);
+}
