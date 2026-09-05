@@ -34,12 +34,20 @@ int	check_burnout(t_config *config)
 
 int	finished(t_config *config)
 {
-	int	i;
+	int		i;
+	int		compile_count;
+	t_coder	*coder;
 
 	i = 0;
+	if (config->nb_compiles_required == 0)
+		return (1);
 	while (i < config->nb_coders)
 	{
-		if (config->coders[i].compile_count != config->nb_compiles_required)
+		coder = config->coders + i;
+		pthread_mutex_lock(&coder->mutex);
+		compile_count = coder->compile_count;
+		pthread_mutex_unlock(&coder->mutex);
+		if (compile_count < config->nb_compiles_required)
 			return (0);
 		i++;
 	}
