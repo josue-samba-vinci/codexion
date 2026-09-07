@@ -12,14 +12,6 @@
 
 #include "codexion.h"
 
-void	take_dongles(t_coder *coder)
-{
-	pthread_mutex_lock(&coder->first_dongle->mutex);
-	log_action(coder, "has taken a dongle");
-	pthread_mutex_lock(&coder->second_dongle->mutex);
-	log_action(coder, "has taken a dongle");
-}
-
 int	take_one_dongle(t_coder *coder, t_dongle *dongle)
 {
 	pthread_mutex_lock(&dongle->mutex);
@@ -45,6 +37,18 @@ int	take_one_dongle(t_coder *coder, t_dongle *dongle)
 	dongle->available = 0;
 	pthread_mutex_unlock(&dongle->mutex);
 	log_action(coder, "has taken a dongle");
+	return (1);
+}
+
+void	take_dongles(t_coder *coder)
+{
+	if (!take_one_dongle(coder, coder->first_dongle))
+		return (0);
+	if (!take_one_dongle(coder, coder->second_dongle))
+	{
+		release_one_dongle(coder, coder->first_dongle);
+		return (0);
+	}
 	return (1);
 }
 
