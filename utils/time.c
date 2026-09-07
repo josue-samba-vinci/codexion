@@ -39,11 +39,11 @@ void	long_to_timespec(long ms, struct timespec *ts)
 	ts->tv_nsec = ms % 1000 * 1000000;
 	return ;
 }
-int main()
-{
-	struct timespec ts;
-
-	long ms = get_time_ms();
-	long_to_timespec(ms, &ts);
-	printf("tv_sec = %ld, tv_nsec = %ld", ts.tv_sec, ts.tv_nsec);
-}
+//int main()
+//{
+//	struct timespec ts;
+//
+//	long ms = get_time_ms();
+//	long_to_timespec(ms, &ts);
+//	printf("tv_sec = %ld, tv_nsec = %ld", ts.tv_sec, ts.tv_nsec);
+//}
