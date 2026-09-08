@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion                                           :+:      :+:    :+:   */
+/*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josamba- <josamba-@student.42belgium.be>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -96,7 +96,7 @@ long		get_time_ms(void);
 int			sim_is_over(t_config *config);
 void		log_action(t_coder *coder, char *msg);
 void		precise_sleep(long duration_ms, t_config *config);
-void		take_dongles(t_coder *coder);
+int			take_dongles(t_coder *coder);
 void		release_dongles(t_coder *coder);
 int			start_simulation(t_config *config);
 void		handle_one_coder(t_coder *coder);
@@ -118,5 +118,10 @@ int			check_burnout(t_config *config);
 int			finished(t_config *config);
 void		stop_simulation(t_config *config, int coder_id);
 void		*monitor_routine(void *arg);
+void		long_to_timespec(long ms, struct timespec *ts);
+int			take_one_dongle(t_coder *coder, t_dongle *dongle);
+int			available_to_take(t_coder *coder, t_dongle *dongle);
+void		release_one_dongle(t_coder *coder, t_dongle *dongle);
+int			not_available_path(t_coder *coder, t_dongle *dongle);
 
 #endif
