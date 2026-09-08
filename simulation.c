@@ -40,7 +40,8 @@ void	*coder_routine(void *arg)
 	}
 	while (!sim_is_over(coder->config))
 	{
-		take_dongles(coder);
+		if (!take_dongles(coder))
+			return (NULL);
 		update_compile(coder);
 		log_action(coder, "is compiling");
 		precise_sleep(coder->config->time_to_compile, coder->config);
