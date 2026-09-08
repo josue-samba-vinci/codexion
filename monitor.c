@@ -12,6 +12,22 @@
 
 #include "codexion.h"
 
+void	wake_all_dongles(t_config *config)
+{
+	int			i;
+	t_dongle	*dongle;
+
+	i = 0;
+	while (i < config->nb_coders)
+	{
+		dongle = config->dongles + i;
+		pthread_mutex_lock(&dongle->mutex);
+		pthread_cond_broadcast(&dongle->cond);
+		pthread_mutex_unlock(&dongle->mutex);
+		i++;
+	}
+}
+
 int	check_burnout(t_config *config)
 {
 	int		i;
@@ -59,6 +75,7 @@ void	stop_simulation(t_config *config, int coder_id)
 	pthread_mutex_lock(&config->state_lock);
 	config->end = 1;
 	pthread_mutex_unlock(&config->state_lock);
+	wake_all_dongles(config);
 	if (coder_id >= 0)
 	{
 		pthread_mutex_lock(&config->print_lock);
