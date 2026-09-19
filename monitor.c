@@ -93,14 +93,14 @@ void	*monitor_routine(void *arg)
 	while (1)
 	{
 		burned_out = check_burnout(config);
-		if (burned_out >= 0)
-		{
-			stop_simulation(config, burned_out);
-			return (NULL);
-		}
 		if (finished(config))
 		{
 			stop_simulation(config, -1);
+			return (NULL);
+		}
+		if (burned_out >= 0)
+		{
+			stop_simulation(config, burned_out);
 			return (NULL);
 		}
 		usleep(1000);
