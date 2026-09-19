@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <string.h>
 # include <sys/time.h>
 
 # define FIFO 0
@@ -123,5 +124,9 @@ int			take_one_dongle(t_coder *coder, t_dongle *dongle);
 int			available_to_take(t_coder *coder, t_dongle *dongle);
 void		release_one_dongle(t_coder *coder, t_dongle *dongle);
 int			not_available_path(t_coder *coder, t_dongle *dongle);
+void		destroy_dongles(t_dongle *dongle, int n);
+void		destroy_coders(t_coder *coder, int n);
+void		clean_config(t_config *config);
+int			fail_dongles(t_config *config, int n);
 
 #endif

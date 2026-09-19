@@ -20,7 +20,8 @@ SRCS		= main.c \
 			  heap_utils.c \
 			  heap.c \
 			  monitor.c \
-			  dongle_utils.c
+			  dongle_utils.c \
+			  free.c
 
 OBJS		= $(SRCS:.c=.o)
 
