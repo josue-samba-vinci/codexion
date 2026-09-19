@@ -24,13 +24,13 @@ int	init_dongles(t_config *config)
 	while (i < config->nb_coders)
 	{
 		dongle = config->dongles + i;
+		if (!init_heap(&dongle->waiters, config->nb_coders))
+			return (fail_dongles(config, i));
 		pthread_mutex_init(&dongle->mutex, NULL);
 		pthread_cond_init(&dongle->cond, NULL);
 		dongle->id = i;
 		dongle->available = 1;
 		dongle->free_at = 0;
-		if (!init_heap(&dongle->waiters, config->nb_coders))
-			return (0);
 		dongle->ticket = 0;
 		i++;
 	}
