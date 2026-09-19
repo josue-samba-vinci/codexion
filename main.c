@@ -16,10 +16,17 @@ int	main(int argc, char **argv)
 {
 	t_config	config;
 
+	memset(&config, 0, sizeof(t_config));
 	if (!parser(argc, argv, &config))
 		return (1);
 	if (!init_config(&config))
+	{
 		printf("The malloc has failed");
+		clean_config(&config);
+		return (1);
+	}
 	if (!start_simulation(&config))
 		printf("The simulation failed");
+	clean_config(&config);
+	return (0);
 }
